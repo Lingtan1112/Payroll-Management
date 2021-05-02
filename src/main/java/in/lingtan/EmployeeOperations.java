@@ -22,19 +22,16 @@ static HashMap<String,HashMap<String,String>> masterEmployeeDataHash = new HashM
 	 * @return
 	 */
     //This method successfully combines the data with dataField
-	public static HashMap<String, String> addEmployee(String name, String role, String email, String dob, String gender, String mobileNumber, String joiningDate) {
+	public static HashMap<String, HashMap<String, String>> addEmployee(String name, String role, String email, String dob, String gender, String mobileNumber, String joiningDate) {
 		HashMap<String,String> employeeDatas = new HashMap<String,String>();
 		String[] employeeDataKey = {"name","role","email","dob","gender","mobileNumber","joining-Date"};
 		String[] employeeDataValue = {name,role,email,dob,gender,mobileNumber,joiningDate}; //This is an array of user entered values
 		for(int i=0; i<employeeDataKey.length;i++) {
 				employeeDatas.put(employeeDataKey[i],employeeDataValue[i]);
 				
-		}
-		System.out.println(employeeDatas);
-		//System.out.println(employeeDatas); 
-		//HashMap<String,HashMap<String,String>> masterEmployeeData = masterDataStorage(employeeDatas);	
-		//System.out.println(masterEmployeeData); 
-		return employeeDatas;
+		} 
+		HashMap<String,HashMap<String,String>> masterEmployeeData = masterDataStorage(employeeDatas);	
+		return masterEmployeeData;
 	}
 	
 	/**
@@ -43,48 +40,29 @@ static HashMap<String,HashMap<String,String>> masterEmployeeDataHash = new HashM
 	 * @param employeeDatas
 	 * @return
 	 *///This method works good it combines the user data with their name as key value.
-	public static HashMap<String, HashMap<String, String>> masterDataStorage(HashMap<String,String> employeeDatas) {		String getNameOfEmployee = employeeDatas.get("name");
+	
+	public static HashMap<String, HashMap<String, String>> masterDataStorage(HashMap<String,String> employeeDatas) {		
+		String getNameOfEmployee = employeeDatas.get("name");
 		masterEmployeeDataHash.put(getNameOfEmployee, employeeDatas);
 		masterEmployeeData.add(employeeDatas);
-		//System.out.println("Master Data"+masterEmployeeDataHash);
 		return masterEmployeeDataHash;
 	}
 	
-	public static HashMap<String,HashMap<String,String>> deleteEmployee(String employeeToDelete) {
-		//System.out.println("Before delete"+masterEmployeeDataHash);
-		masterEmployeeDataHash.remove(employeeToDelete);
-		//System.out.println("After delete"+masterEmployeeDataHash);
-		return masterEmployeeDataHash;
-	}
-		
-	public static void viewMasterData() {
-		//System.out.println("Display Details121321"+masterEmployeeDataHash);
+	public static HashMap<String,HashMap<String,String>> deleteEmployee(String employeeToDelete, HashMap<String,HashMap<String,String>> masterEmployeeData) {
+		masterEmployeeData.remove(employeeToDelete);
+		return masterEmployeeData;
 	}
 	
-	public static void displayMasterEmployeeData() {
-		//System.out.println("Before - clearEmployee"+masterEmployeeData);
-		//System.out.println("Display Details"+masterEmployeeDataHash);
-		//masterEmployeeData.clear();
-		//System.out.println("After - clearEmployee"+masterEmployeeData);
-		//System.out.println("Cleared"+masterEmployeeData);
+	public static void displayEmployeeData(HashMap<String,HashMap<String,String>> masterEmployeeData ) {
+	System.out.println("Length " + masterEmployeeData.size());
+	for(Entry<String, HashMap<String, String>> individualEmployee :  masterEmployeeData.entrySet() ) 	{
+		System.out.println("1"+individualEmployee);
+		
+		
 	}
-		
-		
-		
-		
-		
+	}
+	
 }
 
 
-
-/*public static void () {
-
-System.out.println("Length " + masterEmployeeData.size());
-System.out.println("Full"+masterEmployeeData);
-//for(int i =0 ; i < masterEmployeeDataHash.size() ; i++) {
-for(HashMap<String, String> individualEmployee : masterEmployeeData )  {
-	System.out.println(individualEmployee);
-	}
-}
-*/
 
