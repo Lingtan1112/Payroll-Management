@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import org.junit.Test;
-
 public class EmployeeOperations {
 static ArrayList<HashMap<String, String>> masterEmployeeData = new ArrayList<HashMap<String,String>>();	//
 static HashMap<String,HashMap<String,String>> masterEmployeeDataHash = new HashMap<String,HashMap<String,String>>();//This HashMap stores the Employee datas into a HashMap with their corresponding name as key eg):Lingtan={name=Lingtan,role=software}
@@ -22,10 +20,10 @@ static HashMap<String,HashMap<String,String>> masterEmployeeDataHash = new HashM
 	 * @return
 	 */
     //This method successfully combines the data with dataField
-	public static HashMap<String, HashMap<String, String>> addEmployee(String name, String role, String email, String dob, String gender, String mobileNumber, String joiningDate) {
+	public static HashMap<String, HashMap<String, String>> addEmployee(String name, String role, String employeeID,String email, String dob, String gender, String mobileNumber, String joiningDate) {
 		HashMap<String,String> employeeDatas = new HashMap<String,String>();
-		String[] employeeDataKey = {"name","role","email","dob","gender","mobileNumber","joining-Date"};
-		String[] employeeDataValue = {name,role,email,dob,gender,mobileNumber,joiningDate}; //This is an array of user entered values
+		String[] employeeDataKey = {"name","role","employeeID","email","dob","gender","mobileNumber","joining-Date"};
+		String[] employeeDataValue = {name, role, employeeID, email, dob, gender, mobileNumber, joiningDate}; //This is an array of user entered values
 		for(int i=0; i<employeeDataKey.length;i++) {
 				employeeDatas.put(employeeDataKey[i],employeeDataValue[i]);
 				
@@ -48,9 +46,9 @@ static HashMap<String,HashMap<String,String>> masterEmployeeDataHash = new HashM
 		return masterEmployeeDataHash;
 	}
 	
-	public static HashMap<String,HashMap<String,String>> deleteEmployee(String employeeToDelete, HashMap<String,HashMap<String,String>> masterEmployeeData) {
-		masterEmployeeData.remove(employeeToDelete);
-		return masterEmployeeData;
+	public static HashMap<String,HashMap<String,String>> deleteEmployee(String employeeToDelete) {
+		masterEmployeeDataHash.remove(employeeToDelete);
+		return masterEmployeeDataHash;
 	}
 	
 	public static void displayEmployeeData(HashMap<String,HashMap<String,String>> masterEmployeeData ) {
@@ -61,7 +59,20 @@ static HashMap<String,HashMap<String,String>> masterEmployeeDataHash = new HashM
 		
 	}
 	}
+	public static HashMap<String, HashMap<String, String>> getMasterEmployeeDataHash() {
+		return masterEmployeeDataHash;
+	}
 	
+	public static ArrayList<HashMap<String, String>> getMasterEmployeeData() {
+		return masterEmployeeData;
+	}
+	public static HashMap<String,String> viewAllDetailsOfEmployee( String employeeName) {
+		HashMap<String,String> individualDataToDisplay = masterEmployeeDataHash.get(employeeName);
+		 return individualDataToDisplay;
+	}
+	
+		
+		
 }
 
 
