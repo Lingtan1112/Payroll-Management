@@ -100,6 +100,15 @@ employeeMap.put(employee1.employeeID,employee1);
 					
 	}
 	
+	public static EmployeeDomainClass salaryCalculation(String employeeId) {
+		EmployeeDomainClass viewAllDetailsOfEmployee = employeeMap.get(employeeId);
+		EmployeeConstants salaryConstants = new EmployeeConstants();
+		double salaryCalculation = (viewAllDetailsOfEmployee.basicPay + salaryConstants.hra + salaryConstants.lunchAllowance + salaryConstants.medicalAllowance) ;
+		viewAllDetailsOfEmployee.pf = (salaryCalculation * 0.07);
+		viewAllDetailsOfEmployee.salary = ( salaryCalculation - viewAllDetailsOfEmployee.pf );		
+		return viewAllDetailsOfEmployee;
+	}
+	
 	
 	
 	
