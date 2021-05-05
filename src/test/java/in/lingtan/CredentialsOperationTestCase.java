@@ -38,10 +38,22 @@ public class CredentialsOperationTestCase {
 		String password =  "nevil";
 		CredentialsOperation.registerEmployee(username, password);
 		HashMap<String,String> masterCredentialStorage = CredentialsOperation.getCredentials();
-		System.out.println(masterCredentialStorage);
+		System.out.println("List of Registered Employees"+masterCredentialStorage);
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////
+	public void isUserAvailableTestCase1() {
+		String employeeId = "Ling2657";
+		boolean isAvailable = CredentialsOperation.isUserAvailable(employeeId);
+		assertTrue(isAvailable);
+	}
 	
+	public void isUserAvailableTestCase2() {
+		String employeeId = "Li265";
+		boolean isAvailable = CredentialsOperation.isUserAvailable(employeeId);
+		assertFalse(isAvailable);
+	}
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Test
 	public void credentialValidationTest1() { //username - correct and password - correct
@@ -84,6 +96,23 @@ public class CredentialsOperationTestCase {
 	}	
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Test
+	public void addAdminCredentailTestCase() { //username-wrong and password-wrong
+		String employeeId = "NewAdmin2222";
+		String password =  "NewAdmin";
+		CredentialsOperation.addNewAdmin(employeeId, password);
+		HashMap<String, String> adminCredentialHashTable = CredentialsOperation.getAdminCredentials();
+		System.out.println("After adding a new admin  :"+adminCredentialHashTable);
+			
+	}	
+	
+	
+	
+	
+	
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Test
 	public void resetPasswordTestcase1() { //username-wrong and password-wrong

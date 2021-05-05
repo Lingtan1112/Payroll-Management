@@ -1,77 +1,110 @@
 package in.lingtan;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class EmployeeOperations {
-static ArrayList<HashMap<String, String>> masterEmployeeData = new ArrayList<HashMap<String,String>>();	//
-static HashMap<String,HashMap<String,String>> masterEmployeeDataHash = new HashMap<String,HashMap<String,String>>();//This HashMap stores the Employee datas into a HashMap with their corresponding name as key eg):Lingtan={name=Lingtan,role=software}
-//static HashMap<String,String> employeeDatas = new HashMap<String,String>(); //This HashMap holds the Employee data with corresponding key and value pair, It is a HashMap of data
+
+
+
+static HashMap<String, EmployeeDomainClass> employeeMap = new HashMap<String, EmployeeDomainClass>();
+
+static {
+EmployeeDomainClass employee1 = new EmployeeDomainClass();
+employee1.name = "Employee1";
+employee1.role = "Software Developer";
+employee1.employeeID = "emp1111";
+employee1.email = "emp1@chainsys.com";
+employee1.dob = LocalDate.of(2000, 12, 12);
+employee1.gender = "Male";
+employee1.mobileNumber =9249324982L;
+employee1.joiningData = LocalDate.of(2000, 12, 12);
+employeeMap.put(employee1.employeeID,employee1);
+		
+}
 
 	/**
-	 * This method is used to add the Employee data mentioned below into a HashMap with corresponding Fields eg) Name = Lingtan 
-	 * @param name
-	 * @param role
-	 * @param email
-	 * @param dob
-	 * @param gender
-	 * @param mobileNumber
-	 * @param joiningDate
-	 * @return
+	 * To add the details of an Employee into a hashmap where the employeeId is the key for the employee
+	 * @param employee
 	 */
-    //This method successfully combines the data with dataField
-	public static HashMap<String, HashMap<String, String>> addEmployee(String name, String role, String employeeID,String email, String dob, String gender, String mobileNumber, String joiningDate) {
-		HashMap<String,String> employeeDatas = new HashMap<String,String>();
-		String[] employeeDataKey = {"name","role","employeeID","email","dob","gender","mobileNumber","joining-Date"};
-		String[] employeeDataValue = {name, role, employeeID, email, dob, gender, mobileNumber, joiningDate}; //This is an array of user entered values
-		for(int i=0; i<employeeDataKey.length;i++) {
-				employeeDatas.put(employeeDataKey[i],employeeDataValue[i]);
-				
-		} 
-		HashMap<String,HashMap<String,String>> masterEmployeeData = masterDataStorage(employeeDatas);	
-		return masterEmployeeData;
+	public static void addEmployee(EmployeeDomainClass employee) {	
+		employeeMap.put(employee.employeeID,employee);
+			
 	}
 	
 	/**
-	 * After creating a HashMap with the user datas of type<String field and HashMap<String datafield and Data>>
-	 * eg) : 
-	 * @param employeeDatas
+	 * To delete an existing employee data using the employeeId which acts as a key for the employee's data and returns true if removed
+	 * @param employeeId
 	 * @return
-	 *///This method works good it combines the user data with their name as key value.
-	
-	public static HashMap<String, HashMap<String, String>> masterDataStorage(HashMap<String,String> employeeDatas) {		
-		String getNameOfEmployee = employeeDatas.get("name");
-		masterEmployeeDataHash.put(getNameOfEmployee, employeeDatas);
-		masterEmployeeData.add(employeeDatas);
-		return masterEmployeeDataHash;
-	}
-	
-	public static HashMap<String,HashMap<String,String>> deleteEmployee(String employeeToDelete) {
-		masterEmployeeDataHash.remove(employeeToDelete);
-		return masterEmployeeDataHash;
-	}
-	
-	public static void displayEmployeeData(HashMap<String,HashMap<String,String>> masterEmployeeData ) {
-	System.out.println("Length " + masterEmployeeData.size());
-	for(Entry<String, HashMap<String, String>> individualEmployee :  masterEmployeeData.entrySet() ) 	{
-		System.out.println("1"+individualEmployee);
-		
+	 */
+	public static boolean deleteEmployee(String employeeId) {
+		boolean isRemoved = false;
+		if(employeeMap.containsKey(employeeId)) {
+			employeeMap.remove(employeeId);
+			isRemoved = true;
+		}
+		return isRemoved;
 		
 	}
-	}
-	public static HashMap<String, HashMap<String, String>> getMasterEmployeeDataHash() {
-		return masterEmployeeDataHash;
+	
+	/**
+	 * This method displays the data of any individual Employee ,This can be displayed by the employeeId which acts as a key to the data
+	 * @param employeeId
+	 * @return
+	 */
+	public static EmployeeDomainClass viewAllDetailsOfEmployee( String employeeId) {
+		EmployeeDomainClass viewAllDetailsOfEmployee = employeeMap.get(employeeId);
+		return viewAllDetailsOfEmployee;
 	}
 	
-	public static ArrayList<HashMap<String, String>> getMasterEmployeeData() {
-		return masterEmployeeData;
-	}
-	public static HashMap<String,String> viewAllDetailsOfEmployee( String employeeName) {
-		HashMap<String,String> individualDataToDisplay = masterEmployeeDataHash.get(employeeName);
-		 return individualDataToDisplay;
+	/**
+	 * This method renames the name of the employee The parameters required are the employeeId and the new updated name
+	 * @param employeeId
+	 * @param newName
+	 * @return
+	 */
+	public static EmployeeDomainClass editEmployeeName( String employeeId, String newName) {
+		EmployeeDomainClass editedDetailsOfEmployee = employeeMap.get(employeeId);
+		editedDetailsOfEmployee.name = newName;
+		return editedDetailsOfEmployee;
 	}
 	
-		
+	/**
+	 * This method checks whether an employee is present inside the list or not and returns true if it is present
+	 * @param employeeId
+	 * @return
+	 */
+	
+	public static boolean isEmployeeAvailable(String employeeId) {
+		boolean isAvailable = false;
+		if(employeeMap.containsKey(employeeId)) {
+			isAvailable = true;
+		}
+		return isAvailable;
+	}
+	
+	/**
+	 * This Method displays the hashMap that stores the employee data
+	 * @return
+	 */
+	
+	public static HashMap<String, EmployeeDomainClass> getEmployeeMap() {
+		return employeeMap;
+	}
+	
+	public static EmployeeDomainClass addSalary(String employeeId, int basicPay){
+		EmployeeDomainClass viewAllDetailsOfEmployee = employeeMap.get(employeeId);
+		viewAllDetailsOfEmployee.basicPay = basicPay;
+		return viewAllDetailsOfEmployee; 
+					
+	}
+	
+	
+	
+	
+	
+	
 		
 }
 
