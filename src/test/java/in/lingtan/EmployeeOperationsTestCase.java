@@ -11,9 +11,6 @@ import org.junit.Test;
 
 public class EmployeeOperationsTestCase {
 
-
-
-
 	@Test
 	public void addEmployeeTestCase1() { //Example data For employee 1
 		EmployeeDomainClass employee1 = new EmployeeDomainClass();
@@ -27,8 +24,8 @@ public class EmployeeOperationsTestCase {
 		employee1.joiningData = LocalDate.of(2000, 12, 12);
 		
 		EmployeeOperations.addEmployee(employee1);
-		
 	}
+	
 	@Test
 	public void addEmployeeTestCase2() { //Example datas For employee 2
 		EmployeeDomainClass employee2 = new EmployeeDomainClass();
@@ -42,8 +39,8 @@ public class EmployeeOperationsTestCase {
 		employee2.joiningData = LocalDate.of(2000, 12, 12);
 		
 		EmployeeOperations.addEmployee(employee2);
-		
 	}
+	
 	@Test
 	public void addEmployeeTestCase3() { //Example datas For employee 2
 		EmployeeDomainClass employee3 = new EmployeeDomainClass();
@@ -56,8 +53,7 @@ public class EmployeeOperationsTestCase {
 		employee3.mobileNumber =Long.parseLong("9249324982");
 		employee3.joiningData = LocalDate.of(2000, 12, 12);
 		
-		EmployeeOperations.addEmployee(employee3);
-		
+		EmployeeOperations.addEmployee(employee3);	
 	}
 	
 	@Test
@@ -76,27 +72,22 @@ public class EmployeeOperationsTestCase {
 		
 		HashMap<String, EmployeeDomainClass> masterEmployeeData = EmployeeOperations.getEmployeeMap();
 		System.out.println("Master Data after adding 4 Employee  :"+masterEmployeeData);
-		System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-		
+		System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 	@Test  
 	public void deleteEmployeeTestCase1() {
-		
 		String employeeIdToDelete = "Ling2655";
 		boolean isRemoved = EmployeeOperations.deleteEmployee(employeeIdToDelete);
 		assertTrue(isRemoved);
-		
 	}
 	
 	@Test  
 	public void deleteEmployeeTestCase2() {
-		
 		String employeeIdToDelete = "Ling265";
 		boolean isRemoved = EmployeeOperations.deleteEmployee(employeeIdToDelete);
 		assertFalse(isRemoved);
-		
 	}
 	
 
@@ -107,7 +98,7 @@ public class EmployeeOperationsTestCase {
 			EmployeeOperations.deleteEmployee(employeeIdToDelete);
 			HashMap<String, EmployeeDomainClass> employeeMap = EmployeeOperations.getEmployeeMap();
 			System.out.println("After Deletion  :"+employeeMap);
-			System.out.println("--------------------------------------------------------------------------------------------------------------");
+			System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,7 +108,7 @@ public class EmployeeOperationsTestCase {
 		String employeeId ="Joseph2655";
 		EmployeeDomainClass individualDataToDisplay =  EmployeeOperations.viewAllDetailsOfEmployee(employeeId);
 		System.out.println(employeeId + "'s Data alone"+"-->"+individualDataToDisplay);
-		System.out.println("--------------------------------------------------------------------------------------------------------------");
+		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		
 	}
 	
@@ -130,7 +121,7 @@ public class EmployeeOperationsTestCase {
 		String newName = "JohnDavid";
 		EmployeeDomainClass editedDetailsOfEmployee =  EmployeeOperations.editEmployeeName(employeeId, newName);
 		System.out.println(employeeId + " After changing name :"+"-->"+editedDetailsOfEmployee);
-		System.out.println("--------------------------------------------------------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		
 	}
 	
@@ -139,7 +130,7 @@ public class EmployeeOperationsTestCase {
 		String newEmail = "JohnDavid@gmail.com";
 		EmployeeDomainClass editedDetailsOfEmployee =  EmployeeOperations.editEmployeeName(employeeId, newEmail);
 		System.out.println(employeeId + " After changing name :"+"-->"+editedDetailsOfEmployee);
-		System.out.println("--------------------------------------------------------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		
 	}
 	
@@ -169,18 +160,38 @@ public class EmployeeOperationsTestCase {
 	public void getEmployeeMap() {
 		HashMap<String, EmployeeDomainClass> employeeMap = EmployeeOperations.getEmployeeMap();
 		System.out.println("Employee Master Data  :"+employeeMap);
-		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Test
-	public void salaryOfEmployeeTestCase() { 
+	public void salaryOfEmployeeTestCase1() { 
 		String employeeId ="Joseph2655";
 		int basicPay = 10000;
-		EmployeeDomainClass individualDataToDisplay =  EmployeeOperations.addSalary(employeeId,basicPay);
-		System.out.println("Salary-->"+individualDataToDisplay);
-		System.out.println("--------------------------------------------------------------------------------------------------------------");
+		EmployeeOperations.addSalary(employeeId,basicPay);
 	}
 	
+	@Test
+	public void salaryOfEmployeeTestCase2() { 
+		String employeeId ="Jd2655";
+		int basicPay = 15000;
+		EmployeeOperations.addSalary(employeeId,basicPay);
+	}
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Test
+	public void salaryCalculationTestCase1() { 
+		String employeeId ="Joseph2655";
+		EmployeeOperations.salaryCalculation(employeeId);
+	}
+	
+	@Test
+	public void salaryCalculationTestCase2() { 
+		String employeeId ="Jd2655";
+		EmployeeOperations.salaryCalculation(employeeId);
+		HashMap<String, EmployeeDomainClass> employeeMap = EmployeeOperations.getEmployeeMap();
+		System.out.println("After updating salary :"+employeeMap);
+	}
+		
 }

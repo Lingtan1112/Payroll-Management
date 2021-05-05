@@ -8,9 +8,9 @@ public class EmployeeDomainClass {
 	public String name;
 	@Override
 	public String toString() {
-		return "Employee-Data[name=" + name + ", role=" + role + ", employeeID=" + employeeID + ", email="
+		return "EmployeeDomainClass [name=" + name + ", role=" + role + ", employeeID=" + employeeID + ", email="
 				+ email + ", dob=" + dob + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", joiningData="
-				+ joiningData + ", basicPay=" + basicPay + "]";
+				+ joiningData + ",  salary=" + salary + "]";
 	}
 	public String role;
 	public String employeeID;
@@ -19,8 +19,9 @@ public class EmployeeDomainClass {
 	public String gender;
 	public long mobileNumber;
 	public LocalDate joiningData;
-	public SalaryDomainClass salaryData;
 	public int basicPay;
+	public double salary;
+	public double pf;
 	
 	
 	
