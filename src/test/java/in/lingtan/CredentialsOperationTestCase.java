@@ -179,7 +179,7 @@ public class CredentialsOperationTestCase {
 	@Test
 	public void resetPasswordTestcase2() { //username-wrong and password-wrong
 		String employeeId = null;
-		String oldPassword =  "@Password123";
+		String oldPassword = "@Password123";
 		String newPassword = null;
 		
 		boolean inValidCredentials = CredentialsOperation.resetPassword(employeeId, oldPassword, newPassword);

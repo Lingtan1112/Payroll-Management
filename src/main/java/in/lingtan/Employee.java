@@ -1,6 +1,7 @@
 package in.lingtan;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Employee {
@@ -8,10 +9,10 @@ public class Employee {
 	public String name;
 	@Override
 	public String toString() {
-		return "EmployeeDomainClass [name=" + name + ", role=" + role + ", employeeID=" + employeeID + ", email="
-				+ email + ", dob=" + dob + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", joiningData="
+		return "Employee [name=" + name + ", role=" + role + ", employeeID=" + employeeID + ", email=" + email
+				+ ", dob=" + dob + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", joiningData="
 				+ joiningData + ", basicPay=" + basicPay + ", salary=" + salary + ", pf=" + pf + ", attendance="
-				+ attendance + "]";
+				+ attendance + ", present=" + present + ", absent=" + absent + ", attendanceMap=" + attendanceMap + "]";
 	}
 	public String role;
 	public String employeeID;
@@ -24,8 +25,10 @@ public class Employee {
 	public double salary;
 	public double pf;
 	public int attendance;
-	public HashMap <LocalDate,Integer> attendanceMap;
-	public HashMap <Integer, HashMap<LocalDate,Integer>> annualAttendanceChart;
+	public int present;
+	public int absent;
+	public HashMap <LocalDate,Integer> attendanceMap = new HashMap<LocalDate, Integer>();
+	
 	
 	
 	

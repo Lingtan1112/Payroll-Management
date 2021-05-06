@@ -22,7 +22,11 @@ public class EmployeeDataValidation {
 		
 		return isValidName;
 	}
-	
+	/**
+	 * This method returns if the name is empty or not
+	 * @param name
+	 * @return
+	 */
 	public static boolean isNameNotEmpty(String name){  // " " Lingtan Null
 		boolean isValidName = true;
 		
@@ -32,6 +36,20 @@ public class EmployeeDataValidation {
 		
 		return isValidName;
 	}
+	
+	/**
+	 * This verifies whether the role field is filled or not
+	 * @param role
+	 * @return
+	 */
+	public static boolean isValidRole(String role) {
+		boolean isValidRole = true;
+		if(role.isEmpty() || role==null ) {
+			isValidRole = false;
+		}
+		return isValidRole;
+	}
+
 	/**This method checks whether the date of birth is not a future date
 	 * This method
 	 * @param date
@@ -177,7 +195,7 @@ public class EmployeeDataValidation {
 		return isValidMobileNumber;
 	}
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-
 
 }
