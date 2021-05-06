@@ -189,7 +189,7 @@ public class EmployeeDataValidationTestCase {
 	
 	@Test
 	public void isValidPasswordFormatTest2() { //username is wrong password is correct
-		String password =  "@Lingtan123";
+		String password =  "Lingtan123@";
 		boolean isValidPasswordLength = EmployeeDataValidation.isValidPasswordFormat(password);
 		assertTrue(isValidPasswordLength);
 	}
@@ -199,7 +199,7 @@ public class EmployeeDataValidationTestCase {
 	
 	@Test
 	public void isEmployyeeIdFinalTestCase1() {
-	String employeeId = "Ling257";
+	String employeeId = "Lin256";
 	boolean finalEmployeeIdValidation = EmployeeDataValidation.employeeIdValidation(employeeId);
 	assertFalse(finalEmployeeIdValidation);
 	}

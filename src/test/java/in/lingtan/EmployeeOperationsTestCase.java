@@ -195,58 +195,6 @@ public class EmployeeOperationsTestCase {
 		System.out.println("Employee Master Data  :"+employeeMap);
 		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@Test
-	public void basicPayOfEmployeeTestCase1() { 
-		String employeeId ="Ling2655";
-		int basicPay = 10000;
-		EmployeeOperations.addBasicPay(employeeId,basicPay);
-	}
-	
-	@Test
-	public void basicPayOfEmployeeTestCase2() { 
-		String employeeId ="Jose2455";
-		int basicPay = 15000;
-		EmployeeOperations.addBasicPay(employeeId,basicPay);
-	}
-	
-	@Test
-	public void basicPayOfEmployeeTestCase3() { 
-		String employeeId ="Scar1234";
-		int basicPay = 15000;
-		EmployeeOperations.addBasicPay(employeeId,basicPay);
-	}
-	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	@Test
-	public void salaryCalculationTestCase1() { 
-		String employeeId ="Jose2455";
-		EmployeeOperations.salaryCalculation(employeeId);
-		
-	}
-	
-	@Test
-	public void salaryCalculationTestCase2() { 
-		String employeeId ="Ling2655";
-		EmployeeOperations.salaryCalculation(employeeId);
-	}
-	
-	@Test
-	public void salaryCalculationTestCase3() { 
-		String employeeId ="Ling265";
-		EmployeeOperations.salaryCalculation(employeeId);
-		HashMap<String, Employee> employeeMap = EmployeeOperations.getEmployeeMap();
-		System.out.println("After updating salary :"+employeeMap);
-		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-	}
-	
-	@Test
-	public void getAllEmployeeTest(){
-		HashMap<String, Employee> employeeMap = EmployeeOperations.getAllEmployees();
-		System.out.println("Employee Master Data  :"+employeeMap);
-	}
-	
-
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+

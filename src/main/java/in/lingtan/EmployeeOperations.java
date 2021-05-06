@@ -57,16 +57,15 @@ employeeMap.put(employee3.employeeID,employee3);
 	 * @return 
 	 */
 	public static boolean addEmployee(Employee employee) {	
-		
 		boolean isAddedEmployee = false;
-		
 		boolean isEmployeeIdValid = EmployeeDataValidation.employeeIdValidation(employee.employeeID);
 		boolean isValidEmailId = EmployeeDataValidation.isValidEmailId(employee.email);
 		boolean isValidName = EmployeeDataValidation.employeeNameFinalValidation(employee.name);
 		boolean isValidDob = EmployeeDataValidation.isValidDate(employee.dob);
+		boolean isValidRole = EmployeeDataValidation.isValidRole(employee.role);
 		boolean isValidJoiningDate = EmployeeDataValidation.isValidDate(employee.dob);
 		boolean isValidMobileNumber = EmployeeDataValidation.finalMobileNumberValidation(employee.mobileNumber);
-		if(isValidEmailId && isValidName && isValidDob && isValidJoiningDate && isValidMobileNumber && isEmployeeIdValid) {
+		if(isValidEmailId && isValidName && isValidDob && isValidJoiningDate && isValidMobileNumber && isEmployeeIdValid && isValidRole) {
 			employeeMap.put(employee.employeeID,employee);
 			isAddedEmployee = true;
 		}
@@ -146,39 +145,7 @@ employeeMap.put(employee3.employeeID,employee3);
 		return employeeMap;
 	}
 	
-	public static Employee addBasicPay(String employeeId, int basicPay){
 		
-		Employee viewAllDetailsOfEmployee = employeeMap.get(employeeId);
-		try {
-			viewAllDetailsOfEmployee.basicPay = basicPay;
-		}
-		catch(NullPointerException e) {
-			System.out.println(employeeId+" not found to add basic pay");
-			
-		}		
-		return viewAllDetailsOfEmployee; 			
-	}
-	
-	public static Employee salaryCalculation(String employeeId) {
-		Employee viewAllDetailsOfEmployee = employeeMap.get(employeeId);
-		try {
-		EmployeeConstants salaryConstants = new EmployeeConstants();
-		double salaryCalculation = (viewAllDetailsOfEmployee.basicPay + salaryConstants.hra + salaryConstants.lunchAllowance + salaryConstants.medicalAllowance) ;
-		viewAllDetailsOfEmployee.pf = (salaryCalculation * 0.07);
-		viewAllDetailsOfEmployee.salary = ( salaryCalculation - viewAllDetailsOfEmployee.pf );		
-		
-		}
-		catch(NullPointerException e) {
-			System.out.println(employeeId + " Not Found");
-		}
-		return viewAllDetailsOfEmployee;
-	}
-	
-	
-	
-	
-	
-	
 		
 }
 
