@@ -25,9 +25,8 @@ public class CredentialsOperation {
 		public static boolean registerEmployee(String employeeId, String password) {
 			boolean isRegistered = false;
 			
-			boolean isValidAllParameters = employeeIdValidation(employeeId);
+			boolean isValidAllParameters = EmployeeDataValidation.employeeIdValidation(employeeId);
 			boolean isValidPasswordFormat = EmployeeDataValidation.isValidPasswordFormat(password);
-			
 			try {
 				if(masterCredentialStorage.containsKey(employeeId)) {
 					isRegistered=false;
@@ -38,22 +37,12 @@ public class CredentialsOperation {
 					}
 			}
 			catch(NullPointerException e) {
-				System.out.println("Cannot register employee with no fields");
+				
 			}
 			return isRegistered;
 		}
 		
-		public static boolean employeeIdValidation(String employeeId) {
-			boolean isValidAllParameters = false;
-			boolean isEmptyAndNull = InputCredentialDataValidation.isEmptyAndNull(employeeId);
-			boolean isValidEmployeeIdLength = InputCredentialDataValidation.isValidEmployeeIdLength(employeeId);
-			boolean isValidEmployeeIdFormat = InputCredentialDataValidation.isValidEmployyeeIdFormat(employeeId);
-			
-			if(isEmptyAndNull && isValidEmployeeIdFormat && isValidEmployeeIdLength) {
-				isValidAllParameters = true;
-			}
-			return isValidAllParameters;
-		}
+	
 		/**
 		 * The credentials entered by the users are verified and boolean value is returned
 		 * @param employeeId
@@ -62,7 +51,7 @@ public class CredentialsOperation {
 		 */
 		public static boolean employeeCredentialValidation(String employeeId, String password) {
 			boolean isValidCredentials = false;
-			boolean isValidAllParameters = employeeIdValidation(employeeId);
+			boolean isValidAllParameters = EmployeeDataValidation.employeeIdValidation(employeeId);
 			boolean isValidPasswordFormat = EmployeeDataValidation.isValidPasswordFormat(password);
 			if(isValidAllParameters && isValidPasswordFormat) {
 				if(masterCredentialStorage.containsKey(employeeId) && password.equals(masterCredentialStorage.get(employeeId))) {
@@ -110,7 +99,7 @@ public class CredentialsOperation {
 		 */
 		public static boolean addNewAdmin(String newAdminUsername, String newAdminPassword) {
 			boolean isAdminRegistered = false;
-			boolean isValidAllParameters = employeeIdValidation(newAdminUsername);
+			boolean isValidAllParameters = EmployeeDataValidation.employeeIdValidation(newAdminUsername);
 			boolean isValidPasswordFormat = EmployeeDataValidation.isValidPasswordFormat(newAdminPassword);
 			if(masterCredentialStorage.containsKey(newAdminUsername)) {
 				isAdminRegistered=false;

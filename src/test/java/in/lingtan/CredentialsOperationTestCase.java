@@ -54,7 +54,7 @@ public class CredentialsOperationTestCase {
 	
 	@Test
 	public void registerEmployeeTest6() { //Valid employeeID and password
-		String username = "";
+		String username = "  ";
 		String password =  "";
 		boolean isRegistered = CredentialsOperation.registerEmployee(username, password);
 		assertFalse(isRegistered);

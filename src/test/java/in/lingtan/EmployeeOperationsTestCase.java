@@ -13,22 +13,23 @@ public class EmployeeOperationsTestCase {
 
 	@Test
 	public void addEmployeeTestCase1() { //Example data For employee 1
-		EmployeeDomainClass employee1 = new EmployeeDomainClass();
+		Employee employee1 = new Employee();
 		employee1.name = "JosephKuruvila";
 		employee1.role = "Software Developer";
-		employee1.employeeID = "Joseph2655";
+		employee1.employeeID = "Jose2455";
 		employee1.email = "joseph@chainsys.com";
 		employee1.dob = LocalDate.of(2000, 12, 12);
 		employee1.gender = "Male";
-		employee1.mobileNumber =9249324982L;
+		employee1.mobileNumber =Long.parseLong("9249324982");
 		employee1.joiningData = LocalDate.of(2000, 12, 12);
 		
-		EmployeeOperations.addEmployee(employee1);
+		boolean isAddedEmployee = EmployeeOperations.addEmployee(employee1);
+		assertTrue(isAddedEmployee);
 	}
 	
 	@Test
-	public void addEmployeeTestCase2() { //Example datas For employee 2
-		EmployeeDomainClass employee2 = new EmployeeDomainClass();
+	public void addEmployeeTestCase2() { // Invalid data fields so cannot be added
+		Employee employee2 = new Employee();
 		employee2.name = "JD";
 		employee2.role = "Technical Consultant";
 		employee2.email = "jd@chainsys.com";
@@ -43,7 +44,7 @@ public class EmployeeOperationsTestCase {
 	
 	@Test
 	public void addEmployeeTestCase3() { //Example datas For employee 2
-		EmployeeDomainClass employee3 = new EmployeeDomainClass();
+		Employee employee3 = new Employee();
 		employee3.name = "Lingtan";
 		employee3.role = "Ui designer";
 		employee3.email = "lingtan@chainsys.com";
@@ -58,7 +59,7 @@ public class EmployeeOperationsTestCase {
 	
 	@Test
 	public void addEmployeeTestCase4() { 
-		EmployeeDomainClass employee4 = new EmployeeDomainClass();
+		Employee employee4 = new Employee();
 		employee4.name = "Scarlett";
 		employee4.role = "Functional Constultant";
 		employee4.employeeID = "Scarlett2655";
@@ -70,24 +71,42 @@ public class EmployeeOperationsTestCase {
 		EmployeeOperations.addEmployee(employee4);
 		
 		
-		HashMap<String, EmployeeDomainClass> masterEmployeeData = EmployeeOperations.getEmployeeMap();
-		System.out.println("Master Data after adding 4 Employee  :"+masterEmployeeData);
+		
+		
+		HashMap<String, Employee> masterEmployeeData = EmployeeOperations.getEmployeeMap();
+		System.out.println("Master Data after adding Employee  :"+masterEmployeeData);
 		System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+	}
+	
+	@Test
+	public void addEmployeeTestCase5() { //Example data For employee 1
+		Employee employee5 = new Employee();
+		employee5.name = "JosephKuruvila";
+		employee5.role = "Software Developer";
+		employee5.employeeID = "Jose2455";
+		employee5.email = "joseph@chainsys.com";
+		employee5.dob = LocalDate.of(2000, 12, 12);
+		employee5.gender = "Male";
+		employee5.mobileNumber =Long.parseLong("9249324982");
+		employee5.joiningData = LocalDate.of(2000, 12, 12);
+		
+		boolean isAddedEmployee = EmployeeOperations.addEmployee(employee5);
+		assertTrue(isAddedEmployee);
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 	@Test  
 	public void deleteEmployeeTestCase1() {
-		String employeeIdToDelete = "Ling2655";
+		String employeeIdToDelete = "empl1111";
 		boolean isRemoved = EmployeeOperations.deleteEmployee(employeeIdToDelete);
 		assertTrue(isRemoved);
 	}
 	
 	@Test  
 	public void deleteEmployeeTestCase2() {
-		String employeeIdToDelete = "Ling265";
+		String employeeIdToDelete = "empl2222";
 		boolean isRemoved = EmployeeOperations.deleteEmployee(employeeIdToDelete);
-		assertFalse(isRemoved);
+		assertTrue(isRemoved);
 	}
 	
 
@@ -96,7 +115,7 @@ public class EmployeeOperationsTestCase {
 	public void deleteEmployeeTestCase3() { 
 			String employeeIdToDelete = "Scarlett2655";
 			EmployeeOperations.deleteEmployee(employeeIdToDelete);
-			HashMap<String, EmployeeDomainClass> employeeMap = EmployeeOperations.getEmployeeMap();
+			HashMap<String, Employee> employeeMap = EmployeeOperations.getEmployeeMap();
 			System.out.println("After Deletion  :"+employeeMap);
 			System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
@@ -106,7 +125,16 @@ public class EmployeeOperationsTestCase {
 	@Test 
 	public void viewAllDetailsOfEmployeeTestCase1() { 
 		String employeeId ="Joseph2655";
-		EmployeeDomainClass individualDataToDisplay =  EmployeeOperations.viewAllDetailsOfEmployee(employeeId);
+		Employee individualDataToDisplay =  EmployeeOperations.viewAllDetailsOfEmployee(employeeId);
+		System.out.println(employeeId + "'s Data alone"+"-->"+individualDataToDisplay);
+		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		
+	}
+	
+	@Test 
+	public void viewAllDetailsOfEmployeeTestCase2() { 
+		String employeeId ="Ling2655";
+		Employee individualDataToDisplay =  EmployeeOperations.viewAllDetailsOfEmployee(employeeId);
 		System.out.println(employeeId + "'s Data alone"+"-->"+individualDataToDisplay);
 		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		
@@ -117,10 +145,12 @@ public class EmployeeOperationsTestCase {
 	
 	@Test 
 	public void editDetailsOfEmployeeTestCase2() { 
-		String employeeId ="Jd2655";
+		String employeeId ="Ling2655";
 		String newName = "JohnDavid";
-		EmployeeDomainClass editedDetailsOfEmployee =  EmployeeOperations.editEmployeeName(employeeId, newName);
-		System.out.println(employeeId + " After changing name :"+"-->"+editedDetailsOfEmployee);
+		boolean isEditedDetailsOfEmployee =  EmployeeOperations.editEmployeeName(employeeId, newName);
+		assertTrue(isEditedDetailsOfEmployee);
+		Employee actualEmp = EmployeeOperations.viewAllDetailsOfEmployee(employeeId);
+		assertEquals(newName, actualEmp.name);
 		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		
 	}
@@ -128,8 +158,11 @@ public class EmployeeOperationsTestCase {
 	public void editDetailsOfEmployeeTestCase3() { 
 		String employeeId ="Jd2655";
 		String newEmail = "JohnDavid@gmail.com";
-		EmployeeDomainClass editedDetailsOfEmployee =  EmployeeOperations.editEmployeeName(employeeId, newEmail);
-		System.out.println(employeeId + " After changing name :"+"-->"+editedDetailsOfEmployee);
+		boolean isEditedDetailsOfEmployee =  EmployeeOperations.editEmployeeName(employeeId, newEmail);
+		assertFalse(isEditedDetailsOfEmployee);
+		
+		HashMap<String, Employee> employeeMap = EmployeeOperations.getEmployeeMap();
+		System.out.println("After Editing detail  :"+employeeMap);
 		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		
 	}
@@ -150,7 +183,7 @@ public class EmployeeOperationsTestCase {
 		
 		String employeeIdToCheck = "Scarlett2655";
 		boolean isAvailable = EmployeeOperations.isEmployeeAvailable(employeeIdToCheck);
-		assertTrue(isAvailable);
+		assertFalse(isAvailable);
 		
 	}
 	
@@ -158,40 +191,62 @@ public class EmployeeOperationsTestCase {
 	
 	@Test
 	public void getEmployeeMap() {
-		HashMap<String, EmployeeDomainClass> employeeMap = EmployeeOperations.getEmployeeMap();
+		HashMap<String, Employee> employeeMap = EmployeeOperations.getEmployeeMap();
 		System.out.println("Employee Master Data  :"+employeeMap);
 		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Test
-	public void salaryOfEmployeeTestCase1() { 
-		String employeeId ="Joseph2655";
+	public void basicPayOfEmployeeTestCase1() { 
+		String employeeId ="Ling2655";
 		int basicPay = 10000;
-		EmployeeOperations.addSalary(employeeId,basicPay);
+		EmployeeOperations.addBasicPay(employeeId,basicPay);
 	}
 	
 	@Test
-	public void salaryOfEmployeeTestCase2() { 
-		String employeeId ="Jd2655";
+	public void basicPayOfEmployeeTestCase2() { 
+		String employeeId ="Jose2455";
 		int basicPay = 15000;
-		EmployeeOperations.addSalary(employeeId,basicPay);
+		EmployeeOperations.addBasicPay(employeeId,basicPay);
+	}
+	
+	@Test
+	public void basicPayOfEmployeeTestCase3() { 
+		String employeeId ="Scar1234";
+		int basicPay = 15000;
+		EmployeeOperations.addBasicPay(employeeId,basicPay);
 	}
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Test
 	public void salaryCalculationTestCase1() { 
-		String employeeId ="Joseph2655";
+		String employeeId ="Jose2455";
 		EmployeeOperations.salaryCalculation(employeeId);
+		
 	}
 	
 	@Test
 	public void salaryCalculationTestCase2() { 
-		String employeeId ="Jd2655";
+		String employeeId ="Ling2655";
 		EmployeeOperations.salaryCalculation(employeeId);
-		HashMap<String, EmployeeDomainClass> employeeMap = EmployeeOperations.getEmployeeMap();
-		System.out.println("After updating salary :"+employeeMap);
 	}
-		
+	
+	@Test
+	public void salaryCalculationTestCase3() { 
+		String employeeId ="Ling265";
+		EmployeeOperations.salaryCalculation(employeeId);
+		HashMap<String, Employee> employeeMap = EmployeeOperations.getEmployeeMap();
+		System.out.println("After updating salary :"+employeeMap);
+		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+	}
+	
+	@Test
+	public void getAllEmployeeTest(){
+		HashMap<String, Employee> employeeMap = EmployeeOperations.getAllEmployees();
+		System.out.println("Employee Master Data  :"+employeeMap);
+	}
+	
+
 }
