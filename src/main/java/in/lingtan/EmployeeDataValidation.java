@@ -13,16 +13,23 @@ public class EmployeeDataValidation {
 	 * @param name
 	 * @return
 	 */
-	public static boolean isValidName(String name){
+	public static boolean isNameNull(String name){  // " " Lingtan Null
+		boolean isValidName = false;
+		
+		if(name != null) {
+			isValidName = true;
+		}
+		
+		return isValidName;
+	}
+	
+	public static boolean isNameNotEmpty(String name){  // " " Lingtan Null
 		boolean isValidName = true;
-		try{
-			if(name.trim().isEmpty()) {
-				isValidName = false;
-			}
+		
+		if(name.trim().isEmpty()) {
+			isValidName = false;
 		}
-		catch(Exception e) {
-			System.out.println("invalid Name");		
-		}
+		
 		return isValidName;
 	}
 	/**This method checks whether the date of birth is not a future date
@@ -42,14 +49,45 @@ public class EmployeeDataValidation {
 	 * @param number
 	 * @return
 	 */
-	public static boolean isValidMobileNumber(Long number) {
+	public static boolean isValidMobileNumberLength(Long number) {
 		boolean isValidNumber = false;
-		long numberString = (long) number.toString().trim().length();
-		if((numberString == 10) && number != 0) {
-			isValidNumber = true;
-		}
+		if(number != null) {
+			long numberString = (long) number.toString().trim().length();
+			if((numberString == 10) && number != 0) {
+				isValidNumber = true;
+			}
+		}		
 		return isValidNumber;
 	}
+	
+	public static boolean isMobileNumberPositive(Long number) {
+		boolean isValidNumber = false;
+		if(number != null) {
+			if(number>0) {
+			isValidNumber = true;
+			}
+		}		
+		return isValidNumber;
+	}
+	
+	
+	public static boolean isValidEmailId(String emailId) {
+		boolean isValidEmailId = false;
+		if(emailId == null || emailId.isEmpty()) {
+			isValidEmailId = false;
+		}
+		
+		else {
+			String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+			Pattern regexEmailFormat = Pattern.compile(regex);
+			Matcher matchEmailPattern = regexEmailFormat.matcher(emailId);
+			isValidEmailId = matchEmailPattern.matches(); 
+			
+		}
+		return isValidEmailId;
+	}
+
+	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	
@@ -57,10 +95,10 @@ public class EmployeeDataValidation {
 		boolean isEmployeeNull = true;
 			if(employeeId == null){
 				isEmployeeNull = false;	
-				System.out.println("Null password");
+				
 			}
 			else if(employeeId.trim().length()==0) {
-				System.out.println("Please Enter any value"); 
+				 
 				isEmployeeNull = false;
 			}
 		return isEmployeeNull;
@@ -68,22 +106,26 @@ public class EmployeeDataValidation {
 	
 	public static boolean isValidEmployeeIdLength(String employeeId) {
 		boolean isValidEmployeeId = false;
-		if(employeeId.length()==8) {
-			isValidEmployeeId=true;
+		if(employeeId!=null) {
+		if(employeeId.length() == 8) {
+			isValidEmployeeId = true;
 		}
-		System.out.println("Invalid length");
+		}
+		
 		return isValidEmployeeId;
 	}
 	
 	
 	public static boolean isValidEmployyeeIdFormat(String employeeId) {
 		boolean isValidFormat = false;
-		String stringOfId  = employeeId.replaceAll("\\D", "");
-		String digitsOfId  = employeeId.replaceAll("\\d", "");
-		if((stringOfId.length()==4) && (digitsOfId.length()==4)) {
-			isValidFormat=true;
-		}		
-		System.out.println("Invalid Format- RequiredFormat abcd1234");
+		if(employeeId!=null) {
+			String stringOfId  = employeeId.replaceAll("\\D", "");
+			String digitsOfId  = employeeId.replaceAll("\\d", "");
+			if((stringOfId.length()==4) && (digitsOfId.length()==4)) {
+				isValidFormat=true;
+			}	
+		}
+		
 		return isValidFormat;
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +140,44 @@ public class EmployeeDataValidation {
 		 	}
   return isValidFormat;
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public static boolean employeeIdValidation(String employeeId) {
+		boolean isValidAllParameters = false;
+		boolean isEmptyAndNull = EmployeeDataValidation.isEmployeeIdEmptyAndNull(employeeId);
+		boolean isValidEmployeeIdLength = EmployeeDataValidation.isValidEmployeeIdLength(employeeId);
+		boolean isValidEmployeeIdFormat = EmployeeDataValidation.isValidEmployyeeIdFormat(employeeId);
+		
+		if(isEmptyAndNull && isValidEmployeeIdFormat && isValidEmployeeIdLength) {
+			isValidAllParameters = true;
+		}
+		return isValidAllParameters;
+	}
+	
+	public static boolean employeeNameFinalValidation(String employeeName) {
+		boolean isEmployeeNameValid = false;
+		boolean isNameNotNull = EmployeeDataValidation.isNameNotEmpty(employeeName);
+		boolean isNameNull = EmployeeDataValidation.isNameNull(employeeName);
+		if(isNameNotNull && isNameNull) {
+			isEmployeeNameValid = true;
+		}
+		return isEmployeeNameValid;
+	}
+	
+	public static boolean finalMobileNumberValidation(long mobileNumber) {
+		boolean isValidMobileNumber = false;
+		boolean isValidMobileNumberLength = EmployeeDataValidation.isValidMobileNumberLength(mobileNumber);
+		boolean isMobileNumberPositive = EmployeeDataValidation.isMobileNumberPositive(mobileNumber);
+		if(isMobileNumberPositive && isValidMobileNumberLength) {
+			isValidMobileNumber = true;
+			
+		}
+		return isValidMobileNumber;
+	}
+	
+	
+
+
 }
-
-
-
